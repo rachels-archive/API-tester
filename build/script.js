@@ -1,6 +1,7 @@
-import axios from "axios";
-import prettyBytes from "pretty-bytes";
-import setupEditors from "./setupEditor";
+import axios from "./_snowpack/pkg/axios.js";
+import prettyBytes from "./_snowpack/pkg/pretty-bytes.js";
+
+import setupEditors from "../setupEditor";
 
 const form = document.querySelector("[data-form]");
 const responseHeadersContainer = document.querySelector("[data-response-headers]");
@@ -24,7 +25,7 @@ axios.interceptors.response.use(updateEndTime, (e) => {
   return Promise.reject(updateEndTime(e.response));
 });
 
-const { requestEditor, updateResponseEditor } = setupEditors();
+//const { requestEditor, updateResponseEditor } = setupEditors();
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -40,7 +41,7 @@ form.addEventListener("submit", (event) => {
       // unhide response after request is made
       document.querySelector("[data-response-section]").classList.remove("hidden");
       updateResponseDetails(response);
-      updateResponseEditor(response.data);
+      //updateRepsonseEditor(response.data);
       updateRepsonseHeaders(response.headers);
     });
 });
@@ -64,6 +65,7 @@ function updateResponseDetails(response) {
     JSON.stringify(response.data).length + JSON.stringify(response.headers).length
   );
 }
+function updateRepsonseEditor() {}
 
 function updateRepsonseHeaders(headers) {
   responseHeadersContainer.innerHTML = "";

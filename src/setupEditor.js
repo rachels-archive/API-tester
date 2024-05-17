@@ -1,15 +1,17 @@
 import { basicSetup } from "codemirror";
 import { EditorView, keymap } from "@codemirror/view";
-import { EditorState } from "@codemirror/state";
+import { EditorState, Compartment } from "@codemirror/state";
 import { json } from "@codemirror/lang-json";
 
 export default function setupEditors() {
   const jsonRequestBody = document.querySelector("[data-json-request-body]");
   const jsonResponseBody = document.querySelector("[data-json-response-body]");
+  let language = new Compartment(),
+    tabSize = new Compartment();
 
   const basicExtensions = [
     basicSetup,
-    keymap.of([defaultKeymap]),
+    // keymap.of(de),
     language.of(json()),
     tabSize.of(EditorState.tabSize.of(2)),
   ];
@@ -25,7 +27,7 @@ export default function setupEditors() {
   const responseEditor = new EditorView({
     state: EditorState.create({
       doc: "{}",
-      extensions: [...basicExtensions, editable.of(EditorView.editable.of(false))],
+      extensions: [...basicExtensions, EditorView.editable.of(false)],
     }),
     parent: jsonResponseBody,
   });
@@ -40,5 +42,5 @@ export default function setupEditors() {
     });
   }
 
-  return { requestEditor };
+  return { requestEditor, updateResponseEditor };
 }

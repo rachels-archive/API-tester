@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "snowpack build",
     "start": "snowpack dev",
     "build-css": "npx tailwindcss -i ./src/input.css -o ./src/style.css --watch"
   },
@@ -19,8 +20,12 @@
   },
   "homepage": "https://github.com/rachels-archive/API-tester#readme",
   "dependencies": {
+    "@codemirror/lang-json": "^6.0.1",
     "axios": "^1.6.8",
     "codemirror": "^6.0.1",
     "pretty-bytes": "^6.1.1"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.8"
   }
 }
