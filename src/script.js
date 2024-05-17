@@ -27,21 +27,42 @@ function keyValuePairsToObjects(container) {
   }, {});
 }
 
-let tabsContainer = document.querySelector("[data-form]");
-let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
+let requestTabsContainer = document.querySelector("[data-form]");
+let requestTabTogglers = requestTabsContainer.querySelectorAll("#tabs a");
 
-//console.log(tabTogglers);
+let responseTabsContainer = document.querySelector("[data-response-section]");
+let responseTabTogglers = responseTabsContainer.querySelectorAll("#tabs a");
 
-tabTogglers.forEach(function (toggler) {
+requestTabTogglers.forEach(function (toggler) {
   toggler.addEventListener("click", function (e) {
     e.preventDefault();
 
     let tabName = this.getAttribute("href");
 
-    let tabContents = document.querySelector("#tab-contents");
+    let tabContents = document.querySelector("#tab-contents-request");
 
     for (let i = 0; i < tabContents.children.length; i++) {
-      tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+      requestTabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+      tabContents.children[i].classList.remove("hidden");
+      if ("#" + tabContents.children[i].id === tabName) {
+        continue;
+      }
+      tabContents.children[i].classList.add("hidden");
+    }
+    e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
+  });
+});
+
+responseTabTogglers.forEach(function (toggler) {
+  toggler.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    let tabName = this.getAttribute("href");
+
+    let tabContents = document.querySelector("#tab-contents-response");
+
+    for (let i = 0; i < tabContents.children.length; i++) {
+      responseTabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");
       tabContents.children[i].classList.remove("hidden");
       if ("#" + tabContents.children[i].id === tabName) {
         continue;
