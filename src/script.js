@@ -1,4 +1,5 @@
 import axios from "axios";
+import prettyBytes from "pretty-bytes";
 
 const form = document.querySelector("[data-form]");
 const responseHeadersContainer = document.querySelector("[data-response-headers]");
@@ -56,6 +57,9 @@ function keyValuePairsToObjects(container) {
 function updateResponseDetails(response) {
   document.querySelector("[data-status").textContent = response.status;
   document.querySelector("[data-time").textContent = response.customData.time;
+  document.querySelector("[data-size]").textContent = prettyBytes(
+    JSON.stringify(response.data).length + JSON.stringify(response.headers).length
+  );
 }
 
 function updateRepsonseEditor() {}
