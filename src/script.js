@@ -18,8 +18,8 @@ function updateEndTime(response) {
 }
 
 // Axios response interceptor to update the response with the time taken
-axios.interceptors.response.use(updateEndTime, (error) => {
-  return Promise.reject(error);
+axios.interceptors.response.use(updateEndTime, (e) => {
+  return Promise.reject(updateEndTime(e.response));
 });
 
 form.addEventListener("submit", (event) => {
