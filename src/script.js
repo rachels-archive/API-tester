@@ -1,8 +1,36 @@
-let tabsContainer = document.querySelector("#tabs");
+import axios from "axios";
 
+const form = document.querySelector("[data-form]");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  axios({
+    url: document.querySelector("[data-url]").value,
+    method: document.querySelector("[data-method]").value,
+    params: keyValuePairsToObjects(queryParamsContainer),
+    headers: keyValuePairsToObjects(requestHeadersContainer),
+  }).then((json) => {
+    console.log(json);
+  });
+});
+
+function keyValuePairsToObjects(container) {
+  const pairs = container.querySelectorAll("[data-key-value-pair]");
+  // destructure key value pairs and map into objects
+  return [...pairs].reduce((data, pair) => {
+    const key = pair.querySelector("[data-key]").value;
+    const value = pair.querySelector("[data-value]").value;
+
+    if (key === "") return data;
+    return { ...data, [key]: value };
+  }, {});
+}
+
+let tabsContainer = document.querySelector("[data-form]");
 let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
 
-console.log(tabTogglers);
+//console.log(tabTogglers);
 
 tabTogglers.forEach(function (toggler) {
   toggler.addEventListener("click", function (e) {

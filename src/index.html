@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="flex flex-col items-center p-4">
-    <form class="w-1/2">
+    <form class="w-1/2" data-form>
       <h1 class="text-3xl font-bold">API Tester</h1>
 
       <div class="input-group">
@@ -18,8 +18,9 @@
               id="method"
               name="method"
               class="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+              data-method
             >
-              <option value="GET">GET</option>
+              <option value="GET" selected>GET</option>
               <option value="POST">POST</option>
               <option value="PUT">PUT</option>
               <option value="PATCH">PATCH</option>
@@ -34,6 +35,7 @@
             class="block w-full rounded-md border-0 py-1.5 pl-32 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             placeholder="https://example.com"
             required
+            data-url
           />
           <button
             type="submit"
