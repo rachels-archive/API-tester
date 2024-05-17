@@ -3,6 +3,25 @@ import axios from "axios";
 const form = document.querySelector("[data-form]");
 const responseHeadersContainer = document.querySelector("[data-response-headers]");
 
+// Axios request interceptor to store the start time of the request
+axios.interceptors.request.use((request) => {
+  request.customData = request.customData || {};
+  request.customData.startTime = new Date().getTime();
+  return request;
+});
+
+// Function to update the response with the time taken for the request
+function updateEndTime(response) {
+  response.customData = response.customData || {};
+  response.customData.time = new Date().getTime() - response.config.customData.startTime;
+  return response;
+}
+
+// Axios response interceptor to update the response with the time taken
+axios.interceptors.response.use(updateEndTime, (error) => {
+  return Promise.reject(error);
+});
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -11,15 +30,15 @@ form.addEventListener("submit", (event) => {
     method: document.querySelector("[data-method]").value,
     params: keyValuePairsToObjects(queryParamsContainer),
     headers: keyValuePairsToObjects(requestHeadersContainer),
-  }).then((response) => {
-    console.log(response);
-    // unhide response after request is made
-    document.querySelector("[data-response-section]").classList.remove("hidden");
-    //updateResponseDetails(response);
-    //updateRepsonseEditor(response.data);
-    updateRepsonseHeaders(response.headers);
-    console.log(response);
-  });
+  })
+    .catch((e) => e)
+    .then((response) => {
+      // unhide response after request is made
+      document.querySelector("[data-response-section]").classList.remove("hidden");
+      updateResponseDetails(response);
+      //updateRepsonseEditor(response.data);
+      updateRepsonseHeaders(response.headers);
+    });
 });
 
 function keyValuePairsToObjects(container) {
@@ -34,7 +53,10 @@ function keyValuePairsToObjects(container) {
   }, {});
 }
 
-function updateResponseDetails() {}
+function updateResponseDetails(response) {
+  document.querySelector("[data-status").textContent = response.status;
+  document.querySelector("[data-time").textContent = response.customData.time;
+}
 
 function updateRepsonseEditor() {}
 
