@@ -61,7 +61,6 @@ function updateResponseDetails(response) {
     JSON.stringify(response.data).length + JSON.stringify(response.headers).length
   );
 }
-
 function updateRepsonseEditor() {}
 
 function updateRepsonseHeaders(headers) {

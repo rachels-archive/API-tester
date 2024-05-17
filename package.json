@@ -20,6 +20,7 @@
   "homepage": "https://github.com/rachels-archive/API-tester#readme",
   "dependencies": {
     "axios": "^1.6.8",
+    "codemirror": "^6.0.1",
     "pretty-bytes": "^6.1.1"
   }
 }
