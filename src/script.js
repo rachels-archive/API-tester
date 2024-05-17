@@ -23,3 +23,20 @@ tabTogglers.forEach(function (toggler) {
     e.target.parentElement.classList.add("border-t", "border-r", "border-l", "-mb-px", "bg-white");
   });
 });
+
+const queryParamsContainer = document.querySelector("[data-query-params]");
+const requestHeadersContainer = document.querySelector("[data-request-headers]");
+const keyValueTemplate = document.querySelector("[data-key-value-template]");
+
+queryParamsContainer.append(createKeyValuePair());
+requestHeadersContainer.append(createKeyValuePair());
+
+function createKeyValuePair() {
+  const elem = keyValueTemplate.content.cloneNode(true);
+
+  elem.querySelector("[data-remove-btn").addEventListener("click", (event) => {
+    event.target.closest("[data-key-value-pair]").remove();
+  });
+
+  return elem;
+}

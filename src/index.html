@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="flex flex-col items-center p-4">
-    <form class="w-3/4">
+    <form class="w-1/2">
       <h1 class="text-3xl font-bold">API Tester</h1>
 
       <div class="input-group">
@@ -55,18 +55,48 @@
         </ul>
         <!-- Tab Contents -->
         <div id="tab-contents">
-          <div id="query-params" class="p-4">
-            <button class="bg-green-500 hover:bg-green-700 text-white py-2 px-6 rounded">add</button>
+          <div id="query-params" class="">
+            <div data-query-params></div>
+            <button type="button" class="ml-4 mb-4 bg-green-500 hover:bg-green-700 text-white py-2 px-6 rounded">
+              add
+            </button>
           </div>
-          <div id="request-headers" class="hidden p-4">
-            <button class="bg-green-500 hover:bg-green-700 text-white py-2 px-6 rounded">add</button>
+          <div id="request-headers" class="hidden">
+            <div data-request-headers></div>
+            <button type="button" class="ml-4 mb-4 bg-green-500 hover:bg-green-700 text-white py-2 px-6 rounded">
+              add
+            </button>
           </div>
           <div id="json" class="hidden p-4">
-            <div>text editor</div>
+            <div class="overflow-auto max-h-52">text editor</div>
           </div>
         </div>
       </div>
     </form>
+
+    <template data-key-value-template>
+      <div class="my-2 p-4 grid grid-cols-5 gap-2 content-start" data-key-value-pair>
+        <input
+          type="text"
+          placeholder="Key"
+          class="p-2 col-span-2 w-full rounded-md border-0 ring-1 ring-inset ring-gray-300"
+          data-key
+        />
+        <input
+          type="value"
+          placeholder="value"
+          class="p-2 col-span-2 w-full rounded-md border-0 ring-1 ring-inset ring-gray-300"
+          data-value
+        />
+        <button
+          type="button"
+          class="col-span-1 bg-red-500 hover:bg-red-700 text-white py-2 px-1 rounded"
+          data-remove-btn
+        >
+          Remove
+        </button>
+      </div>
+    </template>
 
     <script type="module" src="/script.js"></script>
   </body>
