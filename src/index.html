@@ -3,11 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>API Tester</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <h1 class="text-3xl font-bold">Hello world!</h1>
+  <body class="flex flex-col items-center p-4">
+    <form class="w-3/4">
+      <h1 class="text-3xl font-bold">API Tester</h1>
+
+      <div class="input-group">
+        <div class="relative mt-2 rounded-md shadow-sm">
+          <div class="absolute inset-y-0 left-0 flex items-center">
+            <label for="method" class="sr-only">HTTP Methods</label>
+            <select
+              id="method"
+              name="method"
+              class="h-full rounded-md border-0 bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+            >
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="PATCH">PATCH</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+          </div>
+
+          <input
+            type="url"
+            name="url"
+            id="url"
+            class="block w-full rounded-md border-0 py-1.5 pl-32 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            placeholder="https://example.com"
+            required
+          />
+          <button
+            type="submit"
+            class="absolute inset-y-0 right-0 flex items-center px-3 text-white bg-blue-500 hover:bg-blue-600 rounded-r-lg"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+
+      <div class="rounded border mx-auto mt-4">
+        <!-- Tabs -->
+        <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
+          <li class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px">
+            <a href="#query-params">Query Params</a>
+          </li>
+          <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#request-headers">Headers</a></li>
+          <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#json">JSON</a></li>
+        </ul>
+        <!-- Tab Contents -->
+        <div id="tab-contents">
+          <div id="query-params" class="p-4">
+            <button class="bg-green-500 hover:bg-green-700 text-white py-2 px-6 rounded">add</button>
+          </div>
+          <div id="request-headers" class="hidden p-4">
+            <button class="bg-green-500 hover:bg-green-700 text-white py-2 px-6 rounded">add</button>
+          </div>
+          <div id="json" class="hidden p-4">
+            <div>text editor</div>
+          </div>
+        </div>
+      </div>
+    </form>
 
     <script type="module" src="/script.js"></script>
   </body>
