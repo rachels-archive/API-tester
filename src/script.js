@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const form = document.querySelector("[data-form]");
+const responseHeadersContainer = document.querySelector("[data-response-headers]");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -10,8 +11,14 @@ form.addEventListener("submit", (event) => {
     method: document.querySelector("[data-method]").value,
     params: keyValuePairsToObjects(queryParamsContainer),
     headers: keyValuePairsToObjects(requestHeadersContainer),
-  }).then((json) => {
-    console.log(json);
+  }).then((response) => {
+    console.log(response);
+    // unhide response after request is made
+    document.querySelector("[data-response-section]").classList.remove("hidden");
+    //updateResponseDetails(response);
+    //updateRepsonseEditor(response.data);
+    updateRepsonseHeaders(response.headers);
+    console.log(response);
   });
 });
 
@@ -25,6 +32,35 @@ function keyValuePairsToObjects(container) {
     if (key === "") return data;
     return { ...data, [key]: value };
   }, {});
+}
+
+function updateResponseDetails() {}
+
+function updateRepsonseEditor() {}
+
+function updateRepsonseHeaders(headers) {
+  responseHeadersContainer.innerHTML = "";
+
+  // iterate response headers and display them in headers tab
+  Object.entries(headers).forEach(([key, value]) => {
+    const pair = document.createElement("div");
+    pair.classList.add("header-pair");
+
+    const keyElem = document.createElement("span");
+    keyElem.textContent = key + ": ";
+    // keyElem.classList.add("header-key");
+    pair.appendChild(keyElem);
+    // responseHeadersContainer.append(keyElem);
+
+    const valElem = document.createElement("span");
+    valElem.textContent = value + ": ";
+    // valElem.classList.add("header-value");
+
+    //pair.appendChild(keyElem)
+    pair.appendChild(valElem);
+
+    responseHeadersContainer.appendChild(pair);
+  });
 }
 
 let requestTabsContainer = document.querySelector("[data-form]");
