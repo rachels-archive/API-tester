@@ -27,9 +27,20 @@ tabTogglers.forEach(function (toggler) {
 const queryParamsContainer = document.querySelector("[data-query-params]");
 const requestHeadersContainer = document.querySelector("[data-request-headers]");
 const keyValueTemplate = document.querySelector("[data-key-value-template]");
+const addQueryParamsBtn = document.querySelector("[data-add-query-param-btn]");
+const addRequestHeadersBtn = document.querySelector("[data-add-request-headers-btn]");
 
+// initialise first key-value pair field
 queryParamsContainer.append(createKeyValuePair());
 requestHeadersContainer.append(createKeyValuePair());
+
+addQueryParamsBtn.addEventListener("click", () => {
+  queryParamsContainer.append(createKeyValuePair());
+});
+
+addRequestHeadersBtn.addEventListener("click", () => {
+  requestHeadersContainer.append(createKeyValuePair());
+});
 
 function createKeyValuePair() {
   const elem = keyValueTemplate.content.cloneNode(true);
