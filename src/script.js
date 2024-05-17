@@ -29,11 +29,19 @@ const { requestEditor, updateResponseEditor } = setupEditors();
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
+  let data;
+  try {
+    data = JSON.parse(requestEditor.state.doc.toString() || null);
+  } catch (e) {
+    alert("JSON data is malformed");
+    return;
+  }
   axios({
     url: document.querySelector("[data-url]").value,
     method: document.querySelector("[data-method]").value,
     params: keyValuePairsToObjects(queryParamsContainer),
     headers: keyValuePairsToObjects(requestHeadersContainer),
+    data,
   })
     .catch((e) => e)
     .then((response) => {
